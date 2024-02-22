@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Tạo mới khách hàng doanh nghiệp</title>
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+    <h1>Tạo mới khách hàng doanh nghiệp</h1>
+    <form action="#" th:action="@{/save}" th:object="${product}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Trọng điểm</td>
+                <td><input type="text" th:field="*{istrongdiem}"/></td>
+                <td>STT cấp 1</td>
+                <td><select th:field="*{sttcap1}">
+                    <option th:each="i : ${c1List}" th:value="${i}" th:text="${i}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>STT cấp 2</td>
+                <td><select th:field="*{sttcap2}">
+                    <option th:each="i : ${c2List}" th:value="${i}" th:text="${i}"></option>
+                </select></td>
+                <td>STT cấp 3</td>
+                <td><select th:field="*{sttcap3}">
+                    <option th:each="i : ${c3List}" th:value="${i}" th:text="${i}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Mã số thuế</td>
+                <td><input type="text" th:field="*{mst}"/></td>
+                <td>Tên công ty</td>
+                <td><input type="text" th:field="*{tencty}"/></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ</td>
+                <td><input type="text" th:field="*{diachi}"/></td>
+                <td>Tiêu chí trọng điểm</td>
+                <td><input type="text" th:field="*{tieuchitrongdiem}"/></td>
+            </tr>
+            <tr>
+                <td>Mã hải quan</td>
+                <td><input type="text" th:field="*{mahq}"/></td>
+                <td>Ngày thành lập</td>
+                <td><input type="date" th:field="*{ngaythanhlap}"/></td>
+            </tr>
+            <tr>
+                <td>Ngày thay đổi</td>
+                <td><input type="date" th:field="*{ngaythaydoi}"/></td>
+                <td>Tình Trạng</td>
+                <td><input type="text" th:field="*{tinhtrang}"/></td>
+            </tr>
+            <tr>
+                <td>Lĩnh vực</td>
+                <td><input type="text" th:field="*{linhvuc}"/></td>
+                <td>Ngành nghề kinh doanh</td>
+                <td><input type="text" th:field="*{nganhnghekd}"/></td>
+            </tr>
+            <tr>
+                <td>Tài khoản Vnaccs</td>
+                <td><input type="text" th:field="*{tkvnaccs}"/></td>
+                <td>Tài khoản đại lý</td>
+                <td><input type="text" th:field="*{tkdaily}"/></td>
+            </tr>
+            <tr>
+                <td>Chủ doanh nghiệp</td>
+                <td><input type="text" th:field="*{boss}"/></td>
+                <td>CMT/CCCD</td>
+                <td><input type="text" th:field="*{bossid}"/></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ chủ doanh nghiệp</td>
+                <td><input type="text" th:field="*{bossaddr}"/></td>
+                <td>Chi cục thuế quản lý</td>
+                <td><input type="text" th:field="*{chicucthuequanly}"/></td>
+            </tr>
+            <tr>
+                <td>Đối tác nước ngoài</td>
+                <td><input type="text" th:field="*{doitacnuocngoai}"/></td>
+                <td>Chủ hàng thực tế tại VN</td>
+                <td><input type="text" th:field="*{chuhangthuctetaivietnam}"/></td>
+            </tr>
+            <tr>
+                <td>Chủ hàng thực tế tại nước ngoài</td>
+                <td><input type="text" th:field="*{chuhangthuctetainuocngoai}"/></td>
+                <td>Đại lý logistics tại nước ngoài</td>
+                <td><input type="text" th:field="*{dailylogisticstainuocngoai}"/></td>
+            </tr>
+            <tr>
+                <td>Đại lý logistics tại VN</td>
+                <td><input type="text" th:field="*{dailylogisticstaivietnam}"/></td>
+                <td>Thông tin thu thập và phân tích</td>
+                <td><input type="text" th:field="*{thongtinthunhapvaphantich}"/></td>
+            </tr>
+            <tr>
+                <td>Mã công chức</td>
+                <td><input type="text" th:field="*{congchucid}"/></td>
+                <td>Tên công chức</td>
+                <td><input type="text" th:field="*{congchucname}"/></td>
+            </tr>
+            <tr>
+                <td>MST doanh nghiệp sát nhập</td>
+                <td><input type="text" th:field="*{mstdnsatnhap}"/></td>
+
+                <td>Tên doanh nghiệp sát nhập</td>
+                <td><input type="text" th:field="*{tendnsatnhap}"/></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ doanh nghiệp sát nhập</td>
+                <td><input type="text" th:field="*{diachidnsatnhap}"/></td>
+                <td>MST doanh nghiệp chia tách</td>
+                <td><input type="text" th:field="*{mstdnchiatach}"/></td>
+            </tr>
+            <tr>
+                <td>Tên doanh nghiệp chia tách</td>
+                <td><input type="text" th:field="*{tendnchiatach}"/></td>
+                <td>Địa chỉ doanh nghiệp chia tách</td>
+                <td><input type="text" th:field="*{diachidnchiatach}"/></td>
+            </tr>
+        </table>
+        <button type="submit">Lưu</button>
+    </form>
+</div>
+<script th:inline="javascript">
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+let c1 = /*[[${c1List}]]*/ [];
+let c2 = /*[[${c2List}]]*/ [];
+let c3 = /*[[${c3List}]]*/ [];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput1"), c1);
+autocomplete(document.getElementById("myInput2"), c2);
+autocomplete(document.getElementById("myInput3"), c3);
+
+
+
+</script>
+</body>
+</html>

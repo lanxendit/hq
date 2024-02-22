@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Tạo mới danh mục</title>
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+    <h1>Tạo mới danh mục</h1>
+    <br/>
+    <form action="#" th:action="@{/save/codee}" th:object="${codee}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>STT cấp</td>
+                <td><select name="stt">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Tên</td>
+                <td><input type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Giá trị</td>
+                <td><input type="text" th:field="*{meaning}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Lưu</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

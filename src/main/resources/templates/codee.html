@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý danh mục</title>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<ul class="nav">
+  <li><a href="/">Doanh nghiệp</a></li>
+  <li><a href="/individual">Cá nhân</a></li>
+  <li><a href="/codee">Danh mục</a></li>
+  <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+  <div sec:authorize="isAuthenticated()">
+    Welcome <b><span sec:authentication="name">Username</span></b>
+    &nbsp;
+    <i><span sec:authentication="principal.authorities">Roles</span></i>
+  </div>
+
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+  </form>
+
+  <h1>Quản lý danh mục</h1>
+  <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+    <a href="new/codee">Tạo danh mục</a>
+    <!--    <a href="upload/codeClass">Upload khách hàng cá nhân</a>-->
+  </div>
+
+  <br/><br/>
+  <table border="1" cellpadding="10" id="example" class="display">
+    <thead>
+    <tr>
+      <th>STT cấp</th>
+      <th>Tên</th>
+      <th>Giá trị</th>
+      <th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')"></th>
+    </tr>
+<!--    <tr class="filters">-->
+<!--      <th><input type="text" placeholder="" title=""></th>-->
+<!--      <th><input type="text" placeholder="" title=""></th>-->
+<!--      <th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')"></th>-->
+<!--    </tr>-->
+    </thead>
+    <tbody>
+    <tr th:each="codee : ${listCodees}">
+      <td th:text="${codee.stt}"></td>
+      <td th:text="${codee.name}"></td>
+      <td th:text="${codee.meaning}"></td>
+      <td sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+        <a th:href="@{'/edit/codee/' + ${codee.id}}">Sửa</a>
+
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/delete/codee/' + ${codee.id}}">Xóa</a>
+
+<!--        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/print/codeClass/' + ${codeClass.id}}">In</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

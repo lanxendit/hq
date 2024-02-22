@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý User</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+
+    <h1>Quản lý User</h1>
+    <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+        <a href="new/user">Tạo user</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10" id="example">
+        <thead>
+        <tr>
+            <th>Username</th>
+<!--            <th>Password</th>-->
+            <th>Quyền</th>
+            <th>Tình trạng hoạt động</th>
+            <th sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${listUsers}">
+            <td th:text="${u.username}"></td>
+<!--            <td th:text="${u.password}"></td>-->
+            <td><span th:each="role,state : ${u.roles}" th:text="!${state.last} ? ${role.name}+ ', ': ${role.name}"><br/></span></td>
+            <td th:text="${u.enabled}"></td>
+            <td>
+<!--                <a th:href="@{'/edit/user/' + ${u.username}}">Sửa</a>-->
+
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/delete/user/' + ${u.username}}">Xóa</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa codeClass</title>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<ul class="nav">
+  <li><a href="/">Doanh nghiệp</a></li>
+  <li><a href="/individual">Cá nhân</a></li>
+  <li><a href="/codee">Danh mục</a></li>
+  <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+  <h1>Sửa user</h1>
+  <br/>
+  <form action="#" th:action="@{/save/user}" th:object="${user}" method="post">
+    <table border="0" cellpadding="10">
+      <tr  style="display:none">
+        <td>ID</td>
+        <td><input type="text" th:field="*{id}" readonly="readonly"/></td>
+      </tr>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" th:field="*{username}"/></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="text" th:field="*{password}"></td>
+      </tr>
+      <tr>
+        <td>Chọn quyền</td>
+        <td>
+          <select name="roles" multiple>
+            <option th:each="role : ${role_options}" th:value="${role.id}" th:text="${role.name}"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Hoạt động</td>
+        <td><input type="checkbox" name="enabled" th:checked="${user.enabled}"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit">Lưu</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

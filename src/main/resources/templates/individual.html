@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+      <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      <head>
+      <meta charset="UTF-8">
+      <title>Quản lý khách hàng cá nhân</title>
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<ul class="nav">
+  <li><a href="/">Doanh nghiệp</a></li>
+  <li><a href="/individual">Cá nhân</a></li>
+  <li><a href="/codee">Danh mục</a></li>
+  <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+  <div sec:authorize="isAuthenticated()">
+    Welcome <b><span sec:authentication="name">Username</span></b>
+    &nbsp;
+    <i><span sec:authentication="principal.authorities">Roles</span></i>
+  </div>
+
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+  </form>
+
+  <h1>Quản lý khách hàng cá nhân</h1>
+  <form class="search" action="#" th:action="@{/search/individual}" th:object="${individual}" method="post">
+    <input type="text" field="*{cn_id}" name ="cn_id" placeholder="CCCD/CMT/Hộ chiếu">
+    <input type="text" field="*{tencn}" name ="tencn" placeholder="Tên">
+    <input type="text" field="*{quoctich}" name ="quoctich" placeholder="Quốc tịch">
+    <input type="text" field="*{hokhau_thuongtru}" name ="hokhau_thuongtru" placeholder="Địa chỉ thường trú">
+    <input type="text" field="*{hokhau_tamtru}" name ="hokhau_tamtru" placeholder="Địa chỉ tạm trú">
+    <input type="text" field="*{diachicssx}" name ="diachicssx" placeholder="Địa chỉ cơ sở sản xuất kinh doanh">
+    <input type="text" field="*{linhvuc}" name ="linhvuc" placeholder="Lĩnh vực hoạt động">
+    <input type="text" field="*{tieuchi}" name ="tieuchi" placeholder="Tiêu trí trọng điểm">
+    <input type="text" field="*{mahq}" name ="mahq" placeholder="Chi cục HQ khai báo">
+    <input type="text" field="*{congchuc_id}" name ="congchuc_id" placeholder="Công chức quản lý">
+    <button type="submit">Tìm kiếm</button>
+  </form>
+  <br>
+  <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+    <a href="/new/individual">Tạo khách hàng cá nhân</a>
+    <a href="/upload/individual">Upload khách hàng cá nhân</a>
+  </div>
+
+  <br/><br/>
+  <table border="1" cellpadding="10"  id="example" class="display" style="width:100%">
+    <thead>
+    <tr>
+      <th>Trọng điểm</th>
+      <th>CMT/CCCD</th>
+      <th>Tên</th>
+      <th>Nơi cấp</th>
+      <th>Ngày cấp</th>
+      <th>Ngày hết hạn</th>
+      <th>Giới tính</th>
+      <th>Dân tộc</th>
+      <th>Quốc tịch</th>
+      <th>Hộ khẩu thường trú</th>
+      <th>Hộ khẩu tạm trú</th>
+      <th>Tiêu chí</th>
+      <th>Mã hải quan</th>
+      <th>Lĩnh vực</th>
+      <th>Địa chỉ cssx</th>
+      <th>Cơ quan công tác</th>
+      <th>Quan hệ</th>
+      <th>ID công chức</th>
+      <th>Tên công chức </th>
+      <th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="individual : ${listIndividuals}">
+      <td th:text="${individual.is_trongdiem}"></td>
+      <td th:text="${individual.cn_id}"></td>
+      <td th:text="${individual.tencn}"></td>
+      <td th:text="${individual.noicap}"></td>
+      <td th:text="${individual.ngaycap}"></td>
+      <td th:text="${individual.ngayhethan}"></td>
+      <td th:text="${individual.gioitinh}"></td>
+      <td th:text="${individual.dantoc}"></td>
+      <td th:text="${individual.quoctich}"></td>
+      <td th:text="${individual.hokhau_thuongtru}"></td>
+      <td th:text="${individual.hokhau_tamtru}"></td>
+      <td th:text="${individual.tieuchi}"></td>
+      <td th:text="${individual.mahq}"></td>
+      <td th:text="${individual.linhvuc}"></td>
+      <td th:text="${individual.diachicssx}"></td>
+      <td th:text="${individual.coquan_congtac}"></td>
+      <td th:text="${individual.quanhe}"></td>
+      <td th:text="${individual.congchuc_id}"></td>
+      <td th:text="${individual.congchuc_name}"></td>
+      <td sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+        <a th:href="@{'/edit/individual/' + ${individual.id}}">Sửa</a>
+
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/delete/individual/' + ${individual.id}}">Xóa</a>
+
+<!--        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/print/individual/' + ${individual.id}}">In</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

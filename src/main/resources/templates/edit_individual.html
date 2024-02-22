@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa khách hàng cá nhân</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+    <h1>Sửa khách hàng cá nhân</h1>
+    <br/>
+    <form action="#" th:action="@{/save/individual}" th:object="${individual}" method="post">
+        <table border="0" cellpadding="10">
+            <tr  style="display:none">
+                <td>ID</td>
+                <td><input type="text" th:field="*{id}" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Trọng điểm</td>
+                <td><input type="text" th:field="*{is_trongdiem}" /></td>
+                <td>CMT/CCCD</td>
+                <td><input type="text" th:field="*{cn_id}" /></td>
+            </tr>
+            <tr>
+                <td>Tên</td>
+                <td><input type="text" th:field="*{tencn}" /></td>
+                <td>Nơi cấp</td>
+                <td><input type="text" th:field="*{noicap}" /></td>
+            </tr>
+            <tr>
+                <td>Ngày cấp</td>
+                <td><input type="date" th:field="*{ngaycap}" /></td>
+                <td>Ngày hết hạn</td>
+                <td><input type="date" th:field="*{ngayhethan}" /></td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td><input type="text" th:field="*{gioitinh}" /></td>
+                <td>Dân tộc</td>
+                <td><input type="text" th:field="*{dantoc}" /></td>
+            </tr>
+            <tr>
+                <td>Quốc tịch</td>
+                <td><input type="text" th:field="*{quoctich}" /></td>
+                <td>Hộ khẩu thường trú</td>
+                <td><input th:field="*{hokhau_thuongtru}" /></td>
+            </tr>
+            <tr>
+                <td>Hộ khẩu tạm trú</td>
+                <td><input th:field="*{hokhau_tamtru}" /></td>
+                <td>Tiêu chí</td>
+                <td><input type="text" th:field="*{tieuchi}" /></td>
+            </tr>
+            <tr>
+                <td>Mã hải quan</td>
+                <td><input type="text" th:field="*{mahq}" /></td>
+                <td>Lĩnh vực</td>
+                <td><input type="text" th:field="*{linhvuc}" /></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ cssx</td>
+                <td><input type="text" th:field="*{diachicssx}" /></td>
+                <td>Cơ quan công tác</td>
+                <td><input type="text" th:field="*{coquan_congtac}" /></td>
+            </tr>
+            <tr>
+                <td>Đang công tác</td>
+                <td><input type="text" th:field="*{dang_congtac}" /></td>
+                <td>Quan hệ</td>
+                <td><input type="text" th:field="*{quanhe}" /></td>
+            </tr>
+            <tr>
+                <td>ID công chức</td>
+                <td><input type="text" th:field="*{congchuc_id}" /></td>
+                <td>Tên công chức</td>
+                <td><input type="text" th:field="*{congchuc_name}" /></td>
+            </tr>
+        </table>
+        <td colspan="2"><button type="submit">Lưu</button></td>
+    </form>
+</div>
+</body>
+</html>

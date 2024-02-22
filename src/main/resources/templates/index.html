@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý khách hàng doanh nghiệp</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center">
+    <div sec:authorize="isAuthenticated()">
+        Welcome <b><span sec:authentication="name">Username</span></b>
+        &nbsp;
+        <i><span sec:authentication="principal.authorities">Roles</span></i>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+    <h1>Quản lý khách hàng doanh nghiệp</h1>
+    <form class="search" action="#" th:action="@{/search}" th:object="${p}" method="post">
+        <input type="text" field="*{mst}" name ="mst" placeholder="MST">
+        <input type="text" field="*{tencty}" name ="tencty" placeholder="Tên doanh nghiệp">
+        <input type="text" field="*{diachi}" name ="diachi" placeholder="Địa chỉ">
+        <input type="text" field="*{tinhtrang}" name ="tinhtrang" placeholder="Tình trạng hoạt động">
+        <input type="text" field="*{tieuchitrongdiem}" name ="tieuchitrongdiem" placeholder="Các tiêu chí">
+        <input type="text" field="*{chicucthuequanly}" name ="chicucthuequanly" placeholder="Chi cục HQ khai báo">
+        <input type="text" field="*{congchucid}" name ="congchucid" placeholder="Số hiệu công chức quản lý">
+        <input type="text" field="*{linhvuc}" name ="linhvuc" placeholder="Lĩnh vực hoạt động">
+        <input type="text" field="*{nganhnghekd}" name ="nganhnghekd" placeholder="Ngành nghề KD chính">
+        <input type="text" field="*{tkvnaccs}" name ="tkvnaccs" placeholder="Tài khoản Vnaccs">
+        <input type="text" field="*{tkdaily}" name ="tkdaily" placeholder="Tài khoản đại lý">
+        <input type="text" field="*{boss}" name ="boss" placeholder="Giám đốc DN">
+        <input type="text" field="*{bossid}" name ="bossid" placeholder="CMT/CCCD giám đốc">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+    <br>
+    <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+        <a href="new">Tạo khách hàng doanh nghiệp</a>
+        <a href="upload">Upload khách hàng doanh nghiệp</a>
+        <a th:href="export">Xuất Excel</a>
+    </div>
+
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Trọng điểm</th>
+            <th>STT cấp 1</th>
+            <th>STT cấp 2</th>
+            <th>STT cấp 3</th>
+            <th>Mã số thuế</th>
+            <th>Tên công ty</th>
+            <th>Địa chỉ</th>
+            <th>Tiêu chí trọng điểm</th>
+            <th>Mã hải quan</th>
+            <th>Ngày thành lập</th>
+            <th>Ngày thay đổi</th>
+            <th>Tình Trạng</th>
+            <th>Lĩnh vực</th>
+            <th>Ngành nghề kinh doanh</th>
+            <th>Tài khoản Vnaccs</th>
+            <th>Tài khoản đại lý</th>
+            <th>Chủ doanh nghiệp</th>
+            <th>CMT/CCCD</th>
+            <th>Địa chỉ chủ doanh nghiệp</th>
+            <th>Chi cục thuế quản lý</th>
+            <th>Đối tác nước ngoài</th>
+            <th>Chủ hàng thực tế tại VN</th>
+            <th>Chủ hàng thực tế tại nước ngoài</th>
+            <th>Đại lý logistics tại nước ngoài</th>
+            <th>Đại lý logistics tại VN</th>
+            <th>Thông tin thu thập và phân tích</th>
+            <th>Mã công chức</th>
+            <th>Tên công chức</th>
+            <th>MST doanh nghiệp sát nhập</th>
+            <th>Tên doanh nghiệp sát nhập</th>
+            <th>Địa chỉ doanh nghiệp sát nhập</th>
+            <th>MST doanh nghiệp chia tách</th>
+            <th>Tên doanh nghiệp chia tách</th>
+            <th>Địa chỉ doanh nghiệp chia tách</th>
+            <th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts}">
+            <td th:text="${product.istrongdiem}">istrongdiem</td>
+            <td th:text="${product.sttcap1}">sttcap1</td>
+            <td th:text="${product.sttcap2}">sttcap2</td>
+            <td th:text="${product.sttcap3}">sttcap3</td>
+            <td th:text="${product.mst}">mst</td>
+            <td th:text="${product.tencty}">tencty</td>
+            <td th:text="${product.diachi}">diachi</td>
+            <td th:text="${product.tieuchitrongdiem}">tieuchitrongdiem</td>
+            <td th:text="${product.mahq}">mahq</td>
+            <td th:text="${product.ngaythanhlap}">ngaythanhlap</td>
+            <td th:text="${product.ngaythaydoi}">ngaythaydoi</td>
+            <td th:text="${product.tinhtrang}">tinhtrang</td>
+            <td th:text="${product.linhvuc}">linhvuc</td>
+            <td th:text="${product.nganhnghekd}">nganhnghekd</td>
+            <td th:text="${product.tkvnaccs}">tkvnaccs</td>
+            <td th:text="${product.tkdaily}">tkdaily</td>
+            <td th:text="${product.boss}">boss</td>
+            <td th:text="${product.bossid}">bossid</td>
+            <td th:text="${product.bossaddr}">bossaddr</td>
+            <td th:text="${product.chicucthuequanly}">chicucthuequanly</td>
+            <td th:text="${product.doitacnuocngoai}">doitacnuocngoai</td>
+            <td th:text="${product.chuhangthuctetaivietnam}">chuhangthuctetaivietnam</td>
+            <td th:text="${product.chuhangthuctetainuocngoai}">chuhangthuctetainuocngoai</td>
+            <td th:text="${product.dailylogisticstainuocngoai}">dailylogisticstainuocngoai</td>
+            <td th:text="${product.dailylogisticstaivietnam}">dailylogisticstaivietnam</td>
+            <td th:text="${product.thongtinthunhapvaphantich}">thongtinthunhapvaphantich</td>
+            <td th:text="${product.congchucid}">congchucid</td>
+            <td th:text="${product.congchucname}">congchucname</td>
+            <td th:text="${product.mstdnsatnhap}">mstdnsatnhap</td>
+            <td th:text="${product.tendnsatnhap}">tendnsatnhap</td>
+            <td th:text="${product.diachidnsatnhap}">diachidnsatnhap</td>
+            <td th:text="${product.mstdnchiatach}">mstdnchiatach</td>
+            <td th:text="${product.tendnchiatach}">tendnchiatach</td>
+            <td th:text="${product.diachidnchiatach}">diachidnchiatach</td>
+
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+                <a th:href="@{'/edit/' + ${product.id}}">Sửa</a>
+
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/delete/' + ${product.id}}">Xóa</a>
+
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/print/' + ${product.id}}">In</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

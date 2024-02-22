@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <title>Upload khách hàng doanh nghiệp</title>
+</head>
+<body>
+<ul class="nav">
+    <li><a href="/">Doanh nghiệp</a></li>
+    <li><a href="/individual">Cá nhân</a></li>
+    <li><a href="/codee">Danh mục</a></li>
+    <li><a href="/user">Quản lý User</a></li>
+</ul>
+<div align="center" sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+    <h1>Upload khách hàng doanh nghiệp</h1>
+    <form th:action="@{/files/IMPORT-CN.xlsx}" method="get">
+        <input type="submit" value="Download file mẫu" class="link-button"/>
+    </form>
+    <br/>
+    <form th:action="@{/upload/individual}" method="post" enctype="multipart/form-data">
+        <!--			<label for="myfile">Chọn file:</label>-->
+        <input type="file" id="file" name="file" required><br><br>
+        <button type="submit" class="btn btn-primary">Upload File</button>
+    </form>
+</div>
+<script>
+</script>
+</body>
+</html>
